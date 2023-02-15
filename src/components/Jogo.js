@@ -3,9 +3,11 @@ export default function Jogo(props) {
         <>
             <img src={props.image} alt={props.name} />
             <div className="choose-button">
-                <button disabled>Escolher palavra</button>
+                <button onClick={props.click}>Escolher palavra</button>
             </div>
-            <div className="chosen-word"></div>
+            <div className="chosen-word">
+                {props.showNewWord}
+            </div>
         </>
     )
 }
