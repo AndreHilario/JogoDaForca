@@ -8,17 +8,9 @@ import forca6 from "../assets/forca6.png"
 
 export default function Jogo(props) {
 
-    const { disabled, errors, showNewWord, startGame} = props;
+    const {errors, showNewWord, startGame} = props;
 
-    const images = [
-        forca0,
-        forca1,
-        forca2,
-        forca3,
-        forca4,
-        forca5,
-        forca6
-    ]
+    const images = [forca0, forca1, forca2, forca3, forca4, forca5, forca6];
 
     return (
         <>
