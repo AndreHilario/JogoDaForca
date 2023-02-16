@@ -9,6 +9,7 @@ export default function App() {
   const [wordToPlay, setWordToPlay] = useState([]);
   const [counterErrors, setCounterErrors] = useState(0);
   const [showNewWord, setShowNewWord] = useState("");
+  const [finalAnswer, setFinalAnswer] = useState("chosen-word");
   const [selectedLetters, setSelectedLetters] = useState([]);
  
   const sortWord = palavras[Math.floor(Math.random() * (palavras.length - 1))];
@@ -20,6 +21,7 @@ export default function App() {
     setShowNewWord(Array(sortWord.length).fill("_ "));
     console.log(sortWord)
     setCounterErrors(0);
+    setFinalAnswer("chosen-word");
     setSelectedLetters([]);
   
   }
@@ -38,12 +40,18 @@ export default function App() {
       setCounterErrors(counterErrors + 1);
     }
 
+    if (counterErrors === 5){
+      setShowNewWord(wordToPlay.join(""));
+      setFinalAnswer(`${finalAnswer} wrong-answer`);
+      setDisabled(true);
+    }
+
   }
 
 
   return (
     <div className="game">
-      <Jogo disabled={disabled} errors={counterErrors} showNewWord={showNewWord} startGame={startGame}/>
+      <Jogo disabled={disabled} errors={counterErrors} showNewWord={showNewWord} finalAnswer={finalAnswer} startGame={startGame}/>
 
       <Letras disabled={disabled} selectedLetters={selectedLetters} selectLetter={selectLetter} />
     </div>

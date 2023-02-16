@@ -8,7 +8,7 @@ import forca6 from "../assets/forca6.png"
 
 export default function Jogo(props) {
 
-    const {errors, showNewWord, startGame} = props;
+    const {errors, showNewWord, startGame, finalAnswer} = props;
 
     const images = [forca0, forca1, forca2, forca3, forca4, forca5, forca6];
 
@@ -18,7 +18,7 @@ export default function Jogo(props) {
             <div className="choose-button">
                 <button onClick={startGame}>Escolher palavra</button>
             </div>
-            <div className="chosen-word">
+            <div className={finalAnswer}>
                 {showNewWord}
             </div>
         </>
