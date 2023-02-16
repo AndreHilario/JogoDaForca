@@ -36,6 +36,8 @@ export default function App() {
         }
       });
       setShowNewWord(showNewWord2);
+      console.log(showNewWord2)
+      console.log(wordToPlay)
     } else {
       setCounterErrors(counterErrors + 1);
     }
@@ -44,7 +46,11 @@ export default function App() {
       setShowNewWord(wordToPlay.join(""));
       setFinalAnswer(`${finalAnswer} wrong-answer`);
       setDisabled(true);
-    }
+    } else if (counterErrors < 5 && showNewWord2.join("") === wordToPlay.join("")){
+      setShowNewWord(wordToPlay.join(""));
+      setFinalAnswer(`${finalAnswer} correct-answer`);
+      setDisabled(true);
+    } 
 
   }
 
