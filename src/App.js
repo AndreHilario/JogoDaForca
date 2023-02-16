@@ -1,37 +1,47 @@
 import Jogo from "./components/Jogo";
 import Letras from "./components/Letras";
 import palavras from "./palavras";
-import forca0 from "./assets/forca0.png"
 import { useState } from "react";
 
 
 export default function App() {
-
-  const [image, setImage] = useState(forca0);
   const [disabled, setDisabled] = useState(true);
-  const [erros, setErros] = useState(0);
+  const [wordToPlay, setWordToPlay] = useState([]);
+  const [counterErrors, setCounterErrors] = useState(0);
   const [showNewWord, setShowNewWord] = useState("");
-  const [keyboard, setKeyboard] = useState("keyboard");
+  const [selectedLetters, setSelectedLetters] = useState([]);
+  
 
-  const startGame = () => {
+
+  function startGame() {
     setDisabled(false);
-    setErros(0);
-    const word = palavras[Math.floor(Math.random() * (palavras.length - 1) )];
-    const arrayWord = word.split('');
-    setShowNewWord(arrayWord.fill("_ "));
-    setKeyboard("keyboard-enabled");
+    const sortWord = palavras[Math.floor(Math.random() * (palavras.length - 1))];
+    setWordToPlay(sortWord);
+    setWordToPlay(sortWord.split(""));
+    setShowNewWord(Array(sortWord.length).fill("_ "));
   }
+  
+  function selectLetter (string) {
+    setSelectedLetters([...selectedLetters, string]);
 
- /*  const selectLetter = () => {
+    if (wordToPlay.includes(string.toLowerCase())){
+      let showNewWord2 = [...showNewWord];
+      wordToPlay.forEach((i, index) => {
+        showNewWord2[index] = i.toUppercase();
+      })
+      setShowNewWord(showNewWord2);
+    } else {
+      setCounterErrors(counterErrors + 1);
+    }
 
-  } */
+  }
 
 
   return (
     <div className="game">
-      <Jogo showNewWord={showNewWord} image={image} name="Imagem da Forca" click={startGame} />
+      <Jogo disabled={disabled} errors={counterErrors} showNewWord={showNewWord} startGame={startGame}/>
 
-      <Letras disabled={disabled} keyboard={keyboard} /* select={selectLetter} */ />
+      <Letras disabled={disabled} selectedLetters={selectedLetters} selectLetter={selectLetter} />
     </div>
   )
 }
