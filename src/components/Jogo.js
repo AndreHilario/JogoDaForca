@@ -14,11 +14,11 @@ export default function Jogo(props) {
 
     return (
         <>
-            <img src={images[errors]} alt="Imagem da forca" />
+            <img data-test="game-image" src={images[errors]} alt="Imagem da forca" />
             <div className="choose-button">
-                <button onClick={startGame}>Escolher palavra</button>
+                <button data-test="choose-word" onClick={startGame}>Escolher palavra</button>
             </div>
-            <div className={finalAnswer}>
+            <div data-test="word" className={finalAnswer}>
                 {showNewWord}
             </div>
         </>
