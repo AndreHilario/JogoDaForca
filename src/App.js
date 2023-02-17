@@ -26,10 +26,11 @@ export default function App() {
   }
   
   function selectLetter (string) {
-    setSelectedLetters([...selectedLetters, string]);
+  
     let showNewWord2 = [...showNewWord];
+    setSelectedLetters([...selectedLetters, string]);
 
-    if (wordToPlay.includes(string.toLowerCase())){
+    if (wordToPlay.includes(string)){
       wordToPlay.forEach((i, index) => {
 
         if(string === i){
@@ -61,5 +62,5 @@ export default function App() {
 
       <Letras disabled={disabled} selectedLetters={selectedLetters} selectLetter={selectLetter} />
     </div>
-  )
+  );
 }
