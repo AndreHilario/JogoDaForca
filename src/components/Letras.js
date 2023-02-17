@@ -5,10 +5,11 @@ export default function Letras(props) {
     const {selectedLetters, selectLetter, disabled} = props;
     return (
         <div className="keyboard">
-            {alfabeto.map((i, index) => {const select = selectedLetters.includes(i) 
+            {alfabeto.map((i, index) => {
+            const select = selectedLetters.includes(i);
             return (
                 <button data-test="letter" onClick={() => selectLetter(i, index)} key={i} disabled={disabled || select}>{i.toUpperCase()}</button>)
             })}
-        </div>        
+        </div>       
     )
 }

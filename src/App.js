@@ -19,7 +19,6 @@ export default function App() {
     setWordToPlay(sortWord);
     setWordToPlay(sortWord.split(""));
     setShowNewWord(Array(sortWord.length).fill("_ "));
-    console.log(sortWord)
     setCounterErrors(0);
     setFinalAnswer("chosen-word");
     setSelectedLetters([]);
@@ -29,15 +28,16 @@ export default function App() {
   function selectLetter (string) {
     setSelectedLetters([...selectedLetters, string]);
     let showNewWord2 = [...showNewWord];
+
     if (wordToPlay.includes(string.toLowerCase())){
       wordToPlay.forEach((i, index) => {
+
         if(string === i){
           showNewWord2[index] = i;
         }
       });
+      
       setShowNewWord(showNewWord2);
-      console.log(showNewWord2)
-      console.log(wordToPlay)
     } else {
       setCounterErrors(counterErrors + 1);
     }
