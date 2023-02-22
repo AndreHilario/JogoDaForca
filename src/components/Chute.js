@@ -4,9 +4,9 @@ export default function Chute(props) {
     return (
         <>
             <p>Já sei a palavra!</p>
-            <input disabled={disabled} type="text" placeholder="" onChange={(e) => setKickedWord(e.target.value)} value={kickedWord}>
+            <input data-test="guess-input" disabled={disabled} type="text" placeholder="" onChange={(e) => setKickedWord(e.target.value)} value={kickedWord}>
             </input>
-            <button disabled={disabled} className="kick" onClick={kickedAnswer}>Chutar</button>
+            <button data-test="guess-button" disabled={disabled} className="kick" onClick={kickedAnswer}>Chutar</button>
         </>
     )
 }
