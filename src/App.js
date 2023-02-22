@@ -2,6 +2,7 @@ import Jogo from "./components/Jogo";
 import Letras from "./components/Letras";
 import palavras from "./palavras";
 import { useState } from "react";
+import Chute from "./components/Chute";
 
 
 export default function App() {
@@ -11,8 +12,11 @@ export default function App() {
   const [showNewWord, setShowNewWord] = useState("");
   const [finalAnswer, setFinalAnswer] = useState("chosen-word");
   const [selectedLetters, setSelectedLetters] = useState([]);
+  const [kickedWord, setKickedWord] = useState("");
  
   const sortWord = palavras[Math.floor(Math.random() * (palavras.length - 1))];
+  console.log(wordToPlay)
+  
 
   function startGame() {
     setDisabled(false);
@@ -26,7 +30,6 @@ export default function App() {
   }
   
   function selectLetter (string) {
-  
     let showNewWord2 = [...showNewWord];
     setSelectedLetters([...selectedLetters, string]);
 
@@ -36,8 +39,7 @@ export default function App() {
         if(string === i){
           showNewWord2[index] = i;
         }
-      });
-      
+      }); 
       setShowNewWord(showNewWord2);
     } else {
       setCounterErrors(counterErrors + 1);
@@ -55,12 +57,29 @@ export default function App() {
 
   }
 
+  function kickedAnswer() {
+    setKickedWord("");
+    if(kickedWord.toLowerCase() === wordToPlay.join("")) {
+      setShowNewWord(wordToPlay.join(""));
+      setFinalAnswer(`${finalAnswer} correct-answer`);
+      setDisabled(true);
+    } else {
+      setShowNewWord(wordToPlay.join(""));
+      setFinalAnswer(`${finalAnswer} wrong-answer`);
+      setCounterErrors(6);
+      setDisabled(true);
+    }
+
+  }
+
 
   return (
     <div className="game">
       <Jogo disabled={disabled} errors={counterErrors} showNewWord={showNewWord} finalAnswer={finalAnswer} startGame={startGame}/>
 
       <Letras disabled={disabled} selectedLetters={selectedLetters} selectLetter={selectLetter} />
+
+      <Chute disabled={disabled} setKickedWord={setKickedWord} kickedWord={kickedWord} kickedAnswer={kickedAnswer} />
     </div>
   );
 }
