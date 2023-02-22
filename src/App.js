@@ -15,8 +15,7 @@ export default function App() {
   const [kickedWord, setKickedWord] = useState("");
  
   const sortWord = palavras[Math.floor(Math.random() * (palavras.length - 1))];
-  console.log(wordToPlay)
-  
+  let counter = 0;
 
   function startGame() {
     setDisabled(false);
@@ -42,14 +41,15 @@ export default function App() {
       }); 
       setShowNewWord(showNewWord2);
     } else {
-      setCounterErrors(counterErrors + 1);
+      counter = counterErrors + 1;
+      setCounterErrors(counter);
     }
 
-    if (counterErrors === 5){
+    if (counter === 6){
       setShowNewWord(wordToPlay.join(""));
       setFinalAnswer(`${finalAnswer} wrong-answer`);
       setDisabled(true);
-    } else if (counterErrors < 5 && showNewWord2.join("") === wordToPlay.join("")){
+    } else if (counter < 6 && showNewWord2.join("") === wordToPlay.join("")){
       setShowNewWord(wordToPlay.join(""));
       setFinalAnswer(`${finalAnswer} correct-answer`);
       setDisabled(true);
