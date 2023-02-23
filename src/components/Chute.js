@@ -8,5 +8,5 @@ export default function Chute(props) {
             </input>
             <button data-test="guess-button" disabled={disabled} className="kick" onClick={kickedAnswer}>Chutar</button>
         </>
-    )
+    );
 }
