@@ -13,8 +13,10 @@ export default function App() {
   const [finalAnswer, setFinalAnswer] = useState("chosen-word");
   const [selectedLetters, setSelectedLetters] = useState([]);
   const [kickedWord, setKickedWord] = useState("");
- 
+
   const sortWord = palavras[Math.floor(Math.random() * (palavras.length - 1))];
+  const wordToPlayChanged = wordToPlay.join("").normalize("NFD").replace(/[\u0300-\u036f]/g, '').split("");
+  console.log(wordToPlayChanged)
   let counter = 0;
 
   function startGame() {
@@ -25,43 +27,42 @@ export default function App() {
     setCounterErrors(0);
     setFinalAnswer("chosen-word");
     setSelectedLetters([]);
-  
+    
   }
-  
-  function selectLetter (string) {
+
+  function selectLetter(string) {
     let showNewWord2 = [...showNewWord];
     setSelectedLetters([...selectedLetters, string]);
 
-    const wordToPlayChanged = wordToPlay.join("").normalize("NFD").replace(/[\u0300-\u036f]/g, '').split("");
-
-    if (wordToPlayChanged.includes(string)){
+    if (wordToPlayChanged.includes(string)) {
       wordToPlayChanged.forEach((i, index) => {
 
-        if(string === i){
+        if (string === i) {
           showNewWord2[index] = wordToPlay[index];
         }
-      }); 
+      });
+
       setShowNewWord(showNewWord2);
     } else {
       counter = counterErrors + 1;
       setCounterErrors(counter);
     }
 
-    if (counter === 6){
+    if (counter === 6) {
       setShowNewWord(wordToPlay.join(""));
       setFinalAnswer(`${finalAnswer} wrong-answer`);
       setDisabled(true);
-    } else if (counter < 6 && showNewWord2.join("") === wordToPlay.join("")){
+    } else if (counter < 6 && showNewWord2.join("") === wordToPlay.join("")) {
       setShowNewWord(wordToPlay.join(""));
       setFinalAnswer(`${finalAnswer} correct-answer`);
       setDisabled(true);
-    } 
+    }
 
   }
 
   function kickedAnswer() {
     setKickedWord("");
-    if(kickedWord.toLowerCase() === wordToPlay.join("")) {
+    if (kickedWord.toLowerCase() === wordToPlay.join("")) {
       setShowNewWord(wordToPlay.join(""));
       setFinalAnswer(`${finalAnswer} correct-answer`);
       setDisabled(true);
@@ -77,7 +78,7 @@ export default function App() {
 
   return (
     <div className="game">
-      <Jogo disabled={disabled} errors={counterErrors} showNewWord={showNewWord} finalAnswer={finalAnswer} startGame={startGame}/>
+      <Jogo disabled={disabled} errors={counterErrors} showNewWord={showNewWord} finalAnswer={finalAnswer} startGame={startGame} />
 
       <Letras disabled={disabled} selectedLetters={selectedLetters} selectLetter={selectLetter} />
 
