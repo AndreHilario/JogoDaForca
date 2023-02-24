@@ -16,7 +16,6 @@ export default function App() {
 
   const sortWord = palavras[Math.floor(Math.random() * (palavras.length - 1))];
   const wordToPlayChanged = wordToPlay.join("").normalize("NFD").replace(/[\u0300-\u036f]/g, '').split("");
-  console.log(wordToPlayChanged)
   let counter = 0;
 
   function startGame() {
@@ -27,7 +26,7 @@ export default function App() {
     setCounterErrors(0);
     setFinalAnswer("chosen-word");
     setSelectedLetters([]);
-    
+
   }
 
   function selectLetter(string) {
