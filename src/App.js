@@ -32,11 +32,13 @@ export default function App() {
     let showNewWord2 = [...showNewWord];
     setSelectedLetters([...selectedLetters, string]);
 
-    if (wordToPlay.includes(string)){
-      wordToPlay.forEach((i, index) => {
+    const wordToPlayChanged = wordToPlay.join("").normalize("NFD").replace(/[\u0300-\u036f]/g, '').split("");
+
+    if (wordToPlayChanged.includes(string)){
+      wordToPlayChanged.forEach((i, index) => {
 
         if(string === i){
-          showNewWord2[index] = i;
+          showNewWord2[index] = wordToPlay[index];
         }
       }); 
       setShowNewWord(showNewWord2);
